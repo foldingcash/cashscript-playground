@@ -1,4 +1,5 @@
 import React from 'react'
+import { Badge } from 'react-bootstrap'
 import useCopy from 'use-copy'
 
 interface Props {
@@ -17,8 +18,7 @@ const CopyText: React.FC<Props> = ({ children }) => {
 
   return (
     <div>
-      <p onClick={copyWithTimeout} style={{ cursor: 'pointer' }}>{children}</p>
-      { copied && <div className="alert alert-success" style={{ width: 'fit-content' }}>Copied!</div> }
+      <p onClick={copyWithTimeout} style={{ cursor: 'pointer' }}>{children}{ copied && <Badge pill variant="success">Copied!</Badge> }</p>
     </div>
   );
 }
