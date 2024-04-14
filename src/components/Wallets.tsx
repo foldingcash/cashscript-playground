@@ -139,24 +139,18 @@ const WalletInfo: React.FC<Props> = ({network, setShowWallets,  wallets, setWall
         </Button>
       </Card.Header>
       <Card.Body>
-        <Card.Text style={{overflowWrap:'anywhere'}}>
-          <strong>Pubkey hex: </strong>
-          <CopyText>{wallet.pubKeyHex}</CopyText>
-          <strong>Pubkeyhash hex: </strong>
-          <CopyText>{wallet.pubKeyHashHex}</CopyText>
-          <strong>{network==="mainnet"? "Address:" : "Testnet Address:"}</strong>
-          <CopyText>{network==="mainnet"? wallet.address : wallet.testnetAddress}</CopyText>
-          <strong>{network==="mainnet"? "Token address:" : "Testnet Token Address:"}</strong>
-          <CopyText>{network==="mainnet"? hash160ToCash(wallet.pubKeyHashHex, false, true) : hash160ToCash(wallet.pubKeyHashHex, true, true)}</CopyText>
-          <strong>Wallet utxos</strong>
-          <p>{wallet.utxos?.length} {wallet.utxos?.length == 1 ? "utxo" : "utxos"}</p>
-        </Card.Text>
+        <CopyText header="Pubkey hex:">{wallet.pubKeyHex}</CopyText>
+        <CopyText header="Pubkeyhash hex:">{wallet.pubKeyHashHex}</CopyText>
+        <CopyText header={network==="mainnet"? "Address:" : "Testnet Address:"}>
+          {network==="mainnet"? wallet.address : wallet.testnetAddress}
+        </CopyText>
+        <CopyText header={network==="mainnet"? "Token address:" : "Testnet Token Address:"}>{network==="mainnet"? hash160ToCash(wallet.pubKeyHashHex, false, true) : hash160ToCash(wallet.pubKeyHashHex, true, true)}</CopyText>
+        <Card.Text><strong>Wallet utxos</strong></Card.Text>
+        <Card.Text>{wallet.utxos?.length} {wallet.utxos?.length == 1 ? "utxo" : "utxos"}</Card.Text>
         <details>
           <summary>Show Private Key</summary>
-          <strong>WIF: </strong>
-          <CopyText>{encodePrivateKeyWif(wallet.privKey, network === "mainnet" ? "mainnet" : "testnet")}</CopyText>
-          <strong>Hex: </strong>
-          <CopyText>{wallet.privKeyHex}</CopyText>
+          <CopyText header="WIF:">{encodePrivateKeyWif(wallet.privKey, network === "mainnet" ? "mainnet" : "testnet")}</CopyText>
+          <CopyText header="Hex:">{wallet.privKeyHex}</CopyText>
         </details>
         <details onClick={() => updateUtxosWallet(wallet,index)}>
           <summary>Show utxos</summary>
