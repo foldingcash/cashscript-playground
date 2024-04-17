@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Badge } from 'react-bootstrap'
 import useCopy from 'use-copy'
 
 interface Props {
@@ -25,7 +25,7 @@ const CopyText: React.FC<Props> = ({ children, header }) => {
         style={{ cursor: 'pointer' }}
       >
         {children}
-        { copied && <div className="alert alert-success" style={{ width: 'fit-content' }}>Copied!</div> }        
+        { copied && <Badge style={{ marginLeft: '0.5rem' }} pill variant="success">Copied!</Badge> }        
       </Card.Text>
     </>
   );
