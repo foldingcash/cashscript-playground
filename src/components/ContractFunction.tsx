@@ -94,22 +94,22 @@ const ContractFunction: React.FC<Props> = ({ contract, abi, network, wallets, up
   )) || []
 
   const inputFields = [...Array(inputs.length)].map((element, i) => (
-    <>
-    {`Input #${i}`}
-    <InputGroup key={`${abi?.name}-input-${i}`}>
-      <Form.Control size="sm"
-        placeholder={i === 0 ? "contract UTXO" : "Add input"}
-        aria-label={i === 0 ? "contract UTXO" : "Add input"}
-        disabled
-      />
-      <Form.Control onChange={event => selectInput(i, event.target.value)} as="select" size="sm" >
-        <option className="text-center" key='Nan' value={`NaN`}>select UTXO</option>
-        {utxoList.map((utxo, inputIndex) => (
-          <option className="text-center" key={`${inputIndex + utxo.name}`} value={`${inputIndex}`}> {utxo.name} </option>
-        ))}
-      </Form.Control>
-    </InputGroup>
-    </>
+    <div key={`${abi?.name}-input-${i}`}>
+      {`Input #${i}`}
+      <InputGroup>
+        <Form.Control size="sm"
+          placeholder={i === 0 ? "contract UTXO" : "Add input"}
+          aria-label={i === 0 ? "contract UTXO" : "Add input"}
+          disabled
+        />
+        <Form.Control onChange={event => selectInput(i, event.target.value)} as="select" size="sm" >
+          <option className="text-center" key='Nan' value={`NaN`}>select UTXO</option>
+          {utxoList.map((utxo, inputIndex) => (
+            <option className="text-center" key={`${inputIndex + utxo.name}`} value={`${inputIndex}`}> {utxo.name} </option>
+          ))}
+        </Form.Control>
+      </InputGroup>
+    </div>
   ))
 
   const tokenFields = (index: number) => (
@@ -342,9 +342,7 @@ const ContractFunction: React.FC<Props> = ({ contract, abi, network, wallets, up
                 {' ' + inputs.length + ' '}
                 <Button variant="outline-secondary" size="sm" onClick={addInput}>+</Button>
               </Card.Subtitle>
-                <div>
-                  {inputFields}
-                </div></>
+              {inputFields}</>
             ) : null}
             <Form style={{ marginTop: '10px', marginBottom: '5px' }}>
               <Form.Check
