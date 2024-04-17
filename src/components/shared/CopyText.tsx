@@ -4,10 +4,9 @@ import useCopy from 'use-copy'
 
 interface Props {
   children: string
-  header: string
 }
 
-const CopyText: React.FC<Props> = ({ children, header }) => {
+const CopyText: React.FC<Props> = ({ children }) => {
   const [copied, copy, setCopied] = useCopy(children);
 
   const copyWithTimeout = () => {
@@ -19,7 +18,6 @@ const CopyText: React.FC<Props> = ({ children, header }) => {
 
   return (
     <>
-      <Card.Text><strong>{header}</strong></Card.Text>
       <Card.Text
         onClick={copyWithTimeout}
         style={{ cursor: 'pointer' }}
